@@ -1,0 +1,83 @@
+##### Get All Posts
+GET http://localhost:8080/api/v1/posts
+Authorization: Basic user password
+
+### update comment
+PUT http://localhost:8080/api/v1/comments/14
+Content-Type: application/json
+
+{
+  "userName": "BEdddBER",
+  "email": "BEBER@GMAIL.CO.IL",
+  "comment": "??????"
+}
+### update Post
+PUT http://localhost:8080/api/v1/posts/3
+Content-Type: application/json
+
+{
+"title": "This Is My First Post Here",
+"content": "I Hope You Enjoy It",
+"createdAt": "",
+"updatedAt": "",
+"comments": ""
+}
+###Delete Post
+DELETE http://localhost:8080/api/v1/posts/3
+
+### add a new Post
+POST http://localhost:8080/api/v1/posts
+Content-Type: application/json
+
+{
+  "title": "This Is My First New Post Here",
+  "content": "I Hope zzaYou Enjoy It",
+  "createdAt": "",
+  "updatedAt": "",
+  "comments": ""
+}
+### add a new Post
+POST http://localhost:8080/api/v1/posts
+Content-Type: application/json
+
+{
+  "title": "This Is My Second Post",
+  "content": "I Hope You Enjoy It Too",
+  "createdAt": "",
+  "updatedAt": "",
+  "comments": ""
+}
+### add a new Comment
+POST  http://localhost:8080/api/v1/posts/3
+Content-Type: application/json
+
+{
+  "comment": "Nice One",
+  "userName": "MyMeo",
+  "email": "MyMeo@Gmai.com",
+  "createdAt": "",
+  "updatedAt": ""
+}
+### add a new Comment
+POST  http://localhost:8080/api/v1/posts/2/comments
+Content-Type: application/json
+
+{
+  "comment": "I Saw Better",
+  "userName": "MyAngelo",
+  "email": "MyAngelo@Gmai.com",
+  "createdAt": "",
+  "updatedAt": ""
+}
+### add a new Comment
+POST  http://localhost:8080/api/v1/posts/2/comments
+Content-Type: application/json
+
+{
+  "comment": "You Just Mean...He Wrote it Pretty Well",
+  "userName": "MyMeo",
+  "email": "MyMeo@Gmai.com",
+  "createdAt": "",
+  "updatedAt": ""
+}
+
