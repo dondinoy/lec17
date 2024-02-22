@@ -5,6 +5,7 @@ Authorization: Basic user password
 ### update comment
 PUT http://localhost:8080/api/v1/comments/14
 Content-Type: application/json
+Authorization: Basic user password
 
 {
   "userName": "BEdddBER",
@@ -14,6 +15,7 @@ Content-Type: application/json
 ### update Post
 PUT http://localhost:8080/api/v1/posts/3
 Content-Type: application/json
+Authorization: Basic user password
 
 {
 "title": "This Is My First Post Here",
@@ -23,11 +25,13 @@ Content-Type: application/json
 "comments": ""
 }
 ###Delete Post
-DELETE http://localhost:8080/api/v1/posts/3
+DELETE http://localhost:8080/api/v1/posts/5
+Authorization: Basic admin password
 
 ### add a new Post
 POST http://localhost:8080/api/v1/posts
 Content-Type: application/json
+Authorization: Basic admin password
 
 {
   "title": "This Is My First New Post Here",
@@ -39,6 +43,7 @@ Content-Type: application/json
 ### add a new Post
 POST http://localhost:8080/api/v1/posts
 Content-Type: application/json
+Authorization: Basic admin password
 
 {
   "title": "This Is My Second Post",
@@ -47,9 +52,25 @@ Content-Type: application/json
   "updatedAt": "",
   "comments": ""
 }
-### add a new Comment
-POST  http://localhost:8080/api/v1/posts/3
+
+### add a new Post
+POST http://localhost:8080/api/v1/posts
 Content-Type: application/json
+Authorization: Basic admin password
+
+
+{
+  "title": "I Like My Posts",
+  "content": "I Hope You Too",
+  "createdAt": "",
+  "updatedAt": "",
+  "comments": ""
+}
+
+### add a new Comment
+POST  http://localhost:8080/api/v1/posts/7
+Content-Type: application/json
+Authorization: Basic admin password
 
 {
   "comment": "Nice One",
@@ -61,6 +82,7 @@ Content-Type: application/json
 ### add a new Comment
 POST  http://localhost:8080/api/v1/posts/2/comments
 Content-Type: application/json
+Authorization: Basic user password
 
 {
   "comment": "I Saw Better",
@@ -72,6 +94,7 @@ Content-Type: application/json
 ### add a new Comment
 POST  http://localhost:8080/api/v1/posts/2/comments
 Content-Type: application/json
+Authorization: Basic user password
 
 {
   "comment": "You Just Mean...He Wrote it Pretty Well",

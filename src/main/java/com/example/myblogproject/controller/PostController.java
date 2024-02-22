@@ -7,6 +7,7 @@ import com.example.myblogproject.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,12 +18,16 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
-
     @PostMapping
-    private ResponseEntity<PostResponseDto>createPost(@RequestBody PostCreateDto dto,UriComponentsBuilder uriBuilder){
-        var res=postService.createPost(dto);
-        var uri=uriBuilder.path("/api/v1/posts").buildAndExpand(res.getId()).toUri();
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<PostResponseDto> createPost(
+            @RequestBody @Valid PostCreateDto dto,
+            UriComponentsBuilder uriBuilder
+    ) {
+        var res = postService.createPost(dto);
+        var uri = uriBuilder.path("/api/v1/posts/{id}").buildAndExpand(res.getId()).toUri();
         return ResponseEntity.created(uri).body(res);
+
     }
 
     @GetMapping
@@ -41,10 +46,14 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostById(id));
     }
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+
     public ResponseEntity<PostResponseDto>updatePost(@PathVariable long id, @RequestBody @Valid PostCreateDto dto ){
         return ResponseEntity.ok(postService.updatePost(id, dto));
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+
     public ResponseEntity<PostResponseDto>deletePost(@PathVariable long id){
         return ResponseEntity.ok(postService.deletePostById(id));
     }
