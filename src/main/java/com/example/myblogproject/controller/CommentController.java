@@ -7,6 +7,7 @@ import com.example.myblogproject.service.CommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -19,9 +20,10 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/posts/{id}/comments")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CommentResponseDTO>createComment(
             @PathVariable(name = "id") Long postId,
-            @Valid @RequestBody CommentResponseDTO dto,
+            @Valid @RequestBody CommentResponseDTO dto,@org.jetbrains.annotations.NotNull
             UriComponentsBuilder uriBilder) {
     var saved=commentService.createComment(postId,dto);
     var uri=uriBilder.path("/posts/{id}/comments").buildAndExpand(saved.getId()).toUri();
@@ -34,12 +36,14 @@ public class CommentController {
     }
 
     @PutMapping("/comments/{id}")
-        public ResponseEntity<CommentResponseDTO> updateCommentById(
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<CommentResponseDTO> updateCommentById(
                 @PathVariable long id, @RequestBody @Valid CommentRequestDTO dto){
         return ResponseEntity.ok(commentService.updateCommentById(id,dto));
 
     }
     @DeleteMapping("/comments/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CommentResponseDTO>deleteComment(@PathVariable long id){
         return ResponseEntity.ok(commentService.deleteCommentById(id));
     }
