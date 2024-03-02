@@ -12,8 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 public class CommentResponseDTO {
     private Long id;
-    private String userName;
-    private String email;
+    private UserResponseDto user;
     private String comment;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

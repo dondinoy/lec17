@@ -15,10 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class CommentRequestDTO {
-    private String userName;
-    private String email;
     @NotNull
     @Size(min = 2,max = 500)
     private String comment;
-
 }

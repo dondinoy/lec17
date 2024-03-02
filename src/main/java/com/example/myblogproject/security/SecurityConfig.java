@@ -19,18 +19,20 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final PasswordEncoder passwordEncoder;
-    @Bean
-    public InMemoryUserDetailsManager userDetails(){
-        return new InMemoryUserDetailsManager(
-            User.withUsername("user")
-            .password(passwordEncoder.encode("password"))
-            .authorities("ROLE_USER")
-            .build(),
-            User.withUsername("admin")
-            .password(passwordEncoder.encode("password"))
-            .authorities("ROLE_ADMIN").build());
-    }
+
+    //DELETE todo
+//    private final PasswordEncoder passwordEncoder;
+//    @Bean
+//    public InMemoryUserDetailsManager userDetails(){
+//        return new InMemoryUserDetailsManager(
+//            User.withUsername("user")
+//            .password(passwordEncoder.encode("password"))
+//            .authorities("ROLE_USER")
+//            .build(),
+//            User.withUsername("admin")
+//            .password(passwordEncoder.encode("password"))
+//            .authorities("ROLE_ADMIN").build());
+//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http

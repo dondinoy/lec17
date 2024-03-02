@@ -1,8 +1,7 @@
 package com.example.myblogproject.controller;
 
-import com.example.myblogproject.dto.PostCreateDto;
-import com.example.myblogproject.dto.PostListDto;
-import com.example.myblogproject.dto.PostResponseDto;
+import com.example.myblogproject.dto.*;
+import com.example.myblogproject.service.AuthService;
 import com.example.myblogproject.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,17 +17,12 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<PostResponseDto> createPost(
-            @RequestBody @Valid PostCreateDto dto,
-            UriComponentsBuilder uriBuilder
-    ) {
-        var res = postService.createPost(dto);
-        var uri = uriBuilder.path("/api/v1/posts/{id}").buildAndExpand(res.getId()).toUri();
-        return ResponseEntity.created(uri).body(res);
+    private final AuthService authService;
 
-    }
+
+
+
+
 
     @GetMapping
     public ResponseEntity<PostListDto> getAllPosts(
@@ -44,6 +38,16 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<PostResponseDto>getPostById(@PathVariable long id){
         return ResponseEntity.ok(postService.getPostById(id));
+    }
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<PostResponseDto> createPost(
+            @RequestBody @Valid PostCreateDto dto,
+            UriComponentsBuilder uriBuilder
+    ) {
+        var res = postService.createPost(dto);
+        var uri = uriBuilder.path("/api/v1/posts/{id}").buildAndExpand(res.getId()).toUri();
+        return ResponseEntity.created(uri).body(res);
     }
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")

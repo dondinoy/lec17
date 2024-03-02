@@ -4,11 +4,9 @@ import com.example.myblogproject.entity.Role;
 import com.example.myblogproject.entity.User;
 import com.example.myblogproject.repository.RoleRepository;
 import com.example.myblogproject.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
@@ -34,17 +32,17 @@ public class SQLRunner implements CommandLineRunner {
                             1L,
                             "admin",
                             "sss@gmail.com",
-                            passwordEncoder.encode("pppPass2@"),
-                            Set.of(adminRole)
+                            passwordEncoder.encode("passw0rd1!P"),
+                            Set.of(adminRole),Set.of()
                     )
             );
             userRepository.save(
                     new User(
                             2L,
-                            "admin",
+                            "user",
                             "aaa@gmail.com",
-                            passwordEncoder.encode("pppWPass2@"),
-                            Set.of(userRole)
+                            passwordEncoder.encode("passw0rd1!P"),
+                            Set.of(userRole),Set.of()
                     )
             );
         }
